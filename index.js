@@ -2,11 +2,13 @@ const io = require('socket.io')(8080);
 const { v4 } = require('uuid');
 
 let users = [];
-const dialog = [{
-  name: 'Server message',
-  msg: 'Connection has been established',
-  timestamp: Date.now(),
-}];
+const dialog = [
+  {
+    name: 'Server message',
+    msg: 'Connection has been established',
+    timestamp: Date.now(),
+  },
+];
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -24,7 +26,7 @@ io.on('connection', (socket) => {
     const message = {
       name,
       msg,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
     dialog.push(message);
     io.to('good-room').emit('dialogs', dialog);
@@ -52,4 +54,3 @@ io.on('connection', (socket) => {
 //     socket: socket
 //   }
 // };
-
